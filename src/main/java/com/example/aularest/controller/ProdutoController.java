@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +45,19 @@ public class ProdutoController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Produto incluir(@RequestBody Produto produto) {
 		return produtoRepository.save(produto);
+		
+	}
+	
+	@PutMapping("/produtos/{produtoId}")
+	public ResponseEntity<Produto> alterar(@PathVariable Integer produtoId, @RequestBody Produto produto) {
+		if(!produtoRepository.existsById(produtoId)) {
+			return ResponseEntity.notFound().build();
+		}
+		produto.setCodigo(produtoId);
+		produto = produtoRepository.save(produto);
+		return ResponseEntity.ok(produto);
+		
+		
 		
 	}
 	
