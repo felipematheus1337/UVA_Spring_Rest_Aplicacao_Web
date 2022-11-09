@@ -10,6 +10,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,10 +57,19 @@ public class ProdutoController {
 		produto.setCodigo(produtoId);
 		produto = produtoRepository.save(produto);
 		return ResponseEntity.ok(produto);
-		
-		
-		
 	}
+	
+	
+	@DeleteMapping("/produtos/{produtoId}")
+	public ResponseEntity<Produto> excluir(@PathVariable Integer produtoId) {
+		if(!produtoRepository.existsById(produtoId)) {
+			return ResponseEntity.notFound().build();
+		}
+		produtoRepository.deleteById(produtoId);
+		return ResponseEntity.noContent().build();
+	}
+	
+	
 	
 	
 }
