@@ -22,3 +22,10 @@ width="185" height="100"/>
 &nbsp;
 </p>
 
+<hr>
+
+<h2> Sobre </h2>
+<p><h4> Um sistema de cadastro de Produtos, com CRUD Completo</h4></p>
+<p><h4>Com utilização de Spring Boot, Postman, e MySQL</h4></p>
+
+
